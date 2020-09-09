@@ -3272,6 +3272,7 @@ var SimplePanel = function SimplePanel(_a) {
   }); //	const theme = useTheme();
 
 
+  console.log(data);
   var styles = getStyles();
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Canvas__WEBPACK_IMPORTED_MODULE_4__["Canvas"], {
     height: height,
