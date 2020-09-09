@@ -3264,9 +3264,9 @@ var SimplePanel = function SimplePanel(_a) {
   var graphOptions = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, options), {
     colors: [options.color1, options.color2]
   }); //	const theme = useTheme();
-  //console.log(data);
 
 
+  console.log(data);
   var parsedData = parseData(data);
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Canvas__WEBPACK_IMPORTED_MODULE_2__["Canvas"], {
     height: height,
@@ -3278,21 +3278,19 @@ var SimplePanel = function SimplePanel(_a) {
 
 var parseData = function parseData(data) {
   if (data.series.length) {
-    var seriesData = data.series;
-    var countris = seriesData.map(function (data) {
-      return data.name;
-    });
+    var seriesData = data.series; // let countris = seriesData.map(data => data.name);
+
     var timestamp = seriesData[0].fields[0].values.buffer;
     var labels = timestamp.map(function (data) {
       return timeConverter(data);
-    });
-    var datasets = [];
+    }); //let datasets = seriesData.map();
+
     console.log(countris, labels);
   }
 };
 
 var timeConverter = function timeConverter(UNIX_timestamp) {
-  var a = new Date(UNIX_timestamp * 1000);
+  var a = new Date(UNIX_timestamp);
   var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   var year = a.getFullYear();
   var month = months[a.getMonth()];
