@@ -10,7 +10,7 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height, id 
   //	const theme = useTheme();
   console.log(data);
   let parsedData = parseData(data);
-  return <Canvas height={height} width={width} panelId={id} options={graphOptions} />;
+  return <Canvas height={height} width={width} panelId={id} options={graphOptions} data={parsedData} />;
 };
 
 const parseData = data => {
@@ -20,8 +20,21 @@ const parseData = data => {
     let timestamp = seriesData[0].fields[0].values.buffer;
     let labels = timestamp.map(data => timeConverter(data));
 
-    //let datasets = seriesData.map();
-    console.log(countris, labels);
+    let datasets = seriesData.map(data => {
+      return {
+        label: data.name,
+        data: data.fields[1].values.buffer,
+      };
+    });
+
+    let dataToReturn = {
+      labels: labels,
+      datasets: datasets,
+    };
+
+    console.log(dataToReturn);
+    return dataToReturn;
+    //console.log(countris, labels);
   }
 };
 

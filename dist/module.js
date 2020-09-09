@@ -3272,7 +3272,8 @@ var SimplePanel = function SimplePanel(_a) {
     height: height,
     width: width,
     panelId: id,
-    options: graphOptions
+    options: graphOptions,
+    data: parsedData
   });
 };
 
@@ -3283,9 +3284,19 @@ var parseData = function parseData(data) {
     var timestamp = seriesData[0].fields[0].values.buffer;
     var labels = timestamp.map(function (data) {
       return timeConverter(data);
-    }); //let datasets = seriesData.map();
-
-    console.log(countris, labels);
+    });
+    var datasets = seriesData.map(function (data) {
+      return {
+        label: data.name,
+        data: data.fields[1].values.buffer
+      };
+    });
+    var dataToReturn = {
+      labels: labels,
+      datasets: datasets
+    };
+    console.log(dataToReturn);
+    return dataToReturn; //console.log(countris, labels);
   }
 };
 
@@ -3349,7 +3360,7 @@ var Canvas = function Canvas(props) {
       var ctx = chartDiv.getContext('2d');
 
       if (ctx) {
-        new chart_heatmap_js__WEBPACK_IMPORTED_MODULE_1___default.a(ctx).HeatMap(data, props.options);
+        new chart_heatmap_js__WEBPACK_IMPORTED_MODULE_1___default.a(ctx).HeatMap(props.data, props.options);
       }
     }
   });

@@ -33,7 +33,7 @@ export const Canvas = props => {
     if (chartDiv) {
       let ctx = chartDiv.getContext('2d');
       if (ctx) {
-        new Chart(ctx).HeatMap(data, props.options);
+        new Chart(ctx).HeatMap(props.data, props.options);
       }
     }
   });
