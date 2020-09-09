@@ -1,0 +1,29 @@
+{
+	"type": "panel",
+	"name": "React Panel Plugin",
+	"id": "myorgid-simple-panel",
+
+	"info": {
+		"description": "My new react panel plugin",
+		"author": {
+			"name": "Mahesh"
+		},
+		"keywords": [ "panel", "template" ],
+		"logos": {
+			"small": "img/logo.svg",
+			"large": "img/logo.svg"
+		},
+		"links": [
+			{ "name": "Website", "url": "https://github.com/grafana/simple-react-panel" },
+			{ "name": "License", "url": "https://github.com/grafana/simple-react-panel/blob/master/LICENSE" }
+		],
+		"screenshots": [],
+		"version": "1.0.0",
+		"updated": "2020-09-08"
+	},
+
+	"dependencies": {
+		"grafanaVersion": "7.0.x",
+		"plugins": []
+	}
+}
