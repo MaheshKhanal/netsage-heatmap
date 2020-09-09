@@ -1,4 +1,4 @@
-define(["@grafana/data","@grafana/ui","emotion","react"], function(__WEBPACK_EXTERNAL_MODULE__grafana_data__, __WEBPACK_EXTERNAL_MODULE__grafana_ui__, __WEBPACK_EXTERNAL_MODULE_emotion__, __WEBPACK_EXTERNAL_MODULE_react__) { return /******/ (function(modules) { // webpackBootstrap
+define(["@grafana/data","react"], function(__WEBPACK_EXTERNAL_MODULE__grafana_data__, __WEBPACK_EXTERNAL_MODULE_react__) { return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -3250,13 +3250,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var emotion__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! emotion */ "emotion");
-/* harmony import */ var emotion__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(emotion__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
-/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var components_Canvas__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! components/Canvas */ "./components/Canvas.tsx");
-
-
+/* harmony import */ var components_Canvas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! components/Canvas */ "./components/Canvas.tsx");
 
 
 
@@ -3270,25 +3264,46 @@ var SimplePanel = function SimplePanel(_a) {
   var graphOptions = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, options), {
     colors: [options.color1, options.color2]
   }); //	const theme = useTheme();
+  //console.log(data);
 
 
-  console.log(data);
-  var styles = getStyles();
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Canvas__WEBPACK_IMPORTED_MODULE_4__["Canvas"], {
+  var parsedData = parseData(data);
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(components_Canvas__WEBPACK_IMPORTED_MODULE_2__["Canvas"], {
     height: height,
     width: width,
     panelId: id,
     options: graphOptions
   });
 };
-var getStyles = Object(_grafana_ui__WEBPACK_IMPORTED_MODULE_3__["stylesFactory"])(function () {
-  return {
-    wrapper: Object(emotion__WEBPACK_IMPORTED_MODULE_2__["css"])(templateObject_1 || (templateObject_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      position: relative;\n    "], ["\n      position: relative;\n    "]))),
-    svg: Object(emotion__WEBPACK_IMPORTED_MODULE_2__["css"])(templateObject_2 || (templateObject_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      position: absolute;\n      top: 0;\n      left: 0;\n    "], ["\n      position: absolute;\n      top: 0;\n      left: 0;\n    "]))),
-    textBox: Object(emotion__WEBPACK_IMPORTED_MODULE_2__["css"])(templateObject_3 || (templateObject_3 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      position: absolute;\n      bottom: 0;\n      left: 0;\n      padding: 10px;\n    "], ["\n      position: absolute;\n      bottom: 0;\n      left: 0;\n      padding: 10px;\n    "])))
-  };
-});
-var templateObject_1, templateObject_2, templateObject_3;
+
+var parseData = function parseData(data) {
+  if (data.series.length) {
+    var seriesData = data.series;
+    var countris = seriesData.map(function (data) {
+      return data.name;
+    });
+    var timestamp = seriesData[0].fields[0].values.buffer;
+    var labels = timestamp.map(function (data) {
+      return timeConverter(data);
+    });
+    var datasets = [];
+    console.log(countris, labels);
+  }
+};
+
+var timeConverter = function timeConverter(UNIX_timestamp) {
+  var a = new Date(UNIX_timestamp * 1000);
+  var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate(); //var hour = a.getHours();
+  //var min = a.getMinutes();
+  //var sec = a.getSeconds();
+  //var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
+
+  var time = date + ' ' + month + ' ' + year;
+  return time;
+};
 
 /***/ }),
 
@@ -3441,28 +3456,6 @@ var plugin = new _grafana_data__WEBPACK_IMPORTED_MODULE_0__["PanelPlugin"](_Simp
 /***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE__grafana_data__;
-
-/***/ }),
-
-/***/ "@grafana/ui":
-/*!******************************!*\
-  !*** external "@grafana/ui" ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE__grafana_ui__;
-
-/***/ }),
-
-/***/ "emotion":
-/*!**************************!*\
-  !*** external "emotion" ***!
-  \**************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_emotion__;
 
 /***/ }),
 
