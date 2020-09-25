@@ -21,9 +21,11 @@ const parseData = data => {
     let labels = timestamp.map(data => timeConverter(data));
 
     let datasets = seriesData.map(data => {
+      let arr = data.fields[1].values.buffer;
+      let logScaledData = arr.map(data => Math.log(data));
       return {
         label: data.name,
-        data: data.fields[1].values.buffer,
+        data: logScaledData,
       };
     });
 
