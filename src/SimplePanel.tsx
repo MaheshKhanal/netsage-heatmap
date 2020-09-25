@@ -23,7 +23,7 @@ const parseData = data => {
     let datasets = seriesData.map(data => {
       return {
         label: data.name,
-        data: Math.log(data.fields[1].values.buffer),
+        data: data.fields[1].values.buffer,
       };
     });
 
